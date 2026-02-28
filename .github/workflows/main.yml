@@ -1,12 +1,15 @@
 name: Morocco Tech Radar
 on:
   schedule:
-    - cron: '0 9 * * *' 
+    - cron: '0 9 * * *' # Runs daily at 9:00 AM Rabat time
   workflow_dispatch: 
+
+permissions:
+  contents: write # Crucial for saving the history file
 
 jobs:
   build:
-    runs-on: ubuntu-latest # Fixed: removed the double "runs-"
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - name: Set up Python
@@ -20,10 +23,10 @@ jobs:
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: python scanner.py
-      - name: Update History
+      - name: Commit changes
         run: |
-          git config --global user.name 'MaTechRadarBot'
-          git config --global user.email 'bot@github.com'
+          git config --local user.email "bot@github.com"
+          git config --local user.name "MaTechRadarBot"
           git add history.json
-          git commit -m "Update history" || exit 0
-          git push
+          git commit -m "Update history" || echo "No new events to save"
+          git push || echo "No changes to push"
