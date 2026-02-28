@@ -1,0 +1,29 @@
+name: Morocco Tech Radar
+on:
+  schedule:
+    - cron: '0 9 * * *' # Runs every day at 9:00 AM Rabat time
+  workflow_dispatch: # Allows you to run it manually for testing
+
+jobs:
+  build:
+    runs-runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+      - run: pip install requests
+      - name: Run Scan
+        env:
+          SERPER_API_KEY: ${{ secrets.SERPER_API_KEY }}
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python scanner.py
+      - name: Update History
+        run: |
+          git config --global user.name 'MaTechRadarBot'
+          git config --global user.email 'bot@github.com'
+          git add history.json
+          git commit -m "Update history" || exit 0
+          git push
