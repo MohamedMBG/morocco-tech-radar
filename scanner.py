@@ -9,13 +9,13 @@ TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
 
 # Targeted Search Queries for Morocco
 QUERIES = [
-    'site:eventbrite.com "Summit" OR "Forum" tech Morocco (Rabat OR Casablanca)',
-    '"GITEX Africa" 2026 Morocco news', # The biggest tech event in Africa
-    '"Salon International" technologie Maroc 2026',
-    '"Assises du Digital" Maroc 2026',
-    '"Cloud and Cyber Security Expo" Casablanca 2026',
-    '"Devoxx Morocco" 2026 dates', # High-authority developer conference
-    'Morocco "Tech Week" 2026 (Rabat OR Casablanca)'
+    'site:marocwebo.com "GITEX Africa" OR "Morocco 300"',
+    'site:medias24.com "Digital" OR "Investissement" OR "Tech"',
+    'site:lematin.ma "Sommet" OR "Forum" technologie',
+    '"PFE" software engineering (Rabat OR Casablanca) 2026',
+    '"Souk des startups" Maroc 2026',
+    '"Devoxx Morocco" 2026 dates',
+    'Morocco "Digital Transformation" summit 2026'
 ]
 
 def search_internet(query):
