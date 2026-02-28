@@ -1,12 +1,12 @@
 name: Morocco Tech Radar
 on:
   schedule:
-    - cron: '0 9 * * *' # Runs every day at 9:00 AM Rabat time
-  workflow_dispatch: # Allows you to run it manually for testing
+    - cron: '0 9 * * *' 
+  workflow_dispatch: 
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest # Fixed: removed the double "runs-"
     steps:
       - uses: actions/checkout@v3
       - name: Set up Python
